@@ -2,8 +2,289 @@
 <html>
 <head>
 <title>Duck Duck Go + Google Suggest OpenSearch Plugin and Proxy</title>
+
+<link rel="search" id="xml-direct" type="application/opensearchdescription+xml" title="Direct Duck Duck Go + Google Suggest" href="ddg-google.xml" >
+
+<link rel="search" id="xml-encrypted" type="application/opensearchdescription+xml" title="Encrypted Duck Duck Go + Google Suggest" href="ddg-google-encrypted.xml" >
+
+<link rel="search" id="xml-proxied" type="application/opensearchdescription+xml" title="Proxied Duck Duck Go + Google Suggest" href="ddg-google-proxied.xml" >
+
+<link rel="stylesheet" href="http://yui.yahooapis.com/2.3.1/build/reset-fonts-grids/reset-fonts-grids.css" type="text/css" >
+<style type="text/css">
+
+body {background: url(images/stripe.png) repeat-x;}
+
+#doc { background-color:#fff; border:1px solid #1a4; margin: 50px auto 300px auto; padding: 0 10px;}
+
+#hd {font-family: 'Times New Roman', serif; }
+
+h1 {font-size:180%; margin:10px 0;}
+h2{font-size:130%; margin:28px 0 5px 0;}
+/* h3 and h4 are only used in the chrometips box */
+h3 { font-size: 130%; }
+h4 { margin: 20px 0 5px 0; }
+
+p {margin: 8px 2px; }
+a{}
+a:link{color:#1a4;}
+a:active{color:#1a4;}
+a:visited{color:#1a4;}
+a:hover{color:#4d5;}
+
+
+ol, ol li { list-style-type: decimal; }
+ul {margin: 16px 0;}
+ul, ul li{list-style-type: disc;}
+li{margin:5px 0 5px 20px; }
+
+ul.contents li {font-size: 115%;}
+
+.highlight { border:3px dashed #67FF14; background-color:#AAFF7D; padding:20px; font-size:120%; }
+.highlight a {color:#324395;}
+.highlight ol,  .highlight li{ font-size:90%;}
+
+.oneclickcontainer {margin:30px 0px;}
+.oneclickcontainer a {border:2px solid #67ff14; padding:20px; -moz-border-radius:10px; -webkit-border-radius:10px; font-size:140%; color: #324395; background-color:#AAFF7D; text-align:center; display:block; margin:20px 0;}
+.oneclickcontainer a:hover {background-color:#BAFF8D;}
+
+.oneclickoption {float:left; border:1px solid grey; padding:10px; width:220px;}
+.oneclickoption.right {border-radius: 0 10px 10px 0; -moz-border-radius: 0 10px 10px 0; -webkit-border-radius: 0 10px 10px 0; margin:0; float:left; border-left:0;}
+.oneclickoption.left {border-radius: 10px 0 0 10px; -moz-border-radius: 10px 0 0 10px; -webkit-border-radius: 10px 0 0 10px; border-right:0; margin-left: 13px;}
+
+.oneclickoption h3 {text-align: center; }
+
+#chrometips {display:none;}
+
+pre { margin-left: 10px; border-left: 2px solid grey; padding-left: 4px; line-height: 120%;}
+
+.right {float:right; margin:5px 5px 5px 10px;}
+.clear {clear:both;}
+
+#ft{font-size: 90%; color:#555; border-top:1px solid #aaa; padding:15px 0; line-height:150%;}
+
+</style>
+
 </head>
 <body>
-<p>This is a basic home page. More stuff to come soon. </p>
+<div id="doc" class="yui-t7">
+   <div id="hd"><h1>Duck Duck Go + Google Suggest Search Plugin</h1></div>
+   <div id="bd">
+    <div class="yui-g">
+    
+      <p class="highlight">This page allows you to add a <a href="http://duckduckgo.com">Duck Duck Go</a> search option to your web browser's built in search bar that uses 
+      <a href="http://www.google.com/support/websearch/bin/answer.py?hl=en&amp;answer=106230">Google's suggestions</a> 
+      to complete searches (and answer math problems).</p>
+      
+      <ul class="contents">
+        <li><a href="#oneclick">One-click install for most modern browsers</a></li>
+        <li><a href="#ff">FireFox</a></li>
+        <li><a href="#ie">Internet Explorer</a></li>
+        <li><a href="#chrome">Chrome</a></li>
+        <li><a href="#opera">Opera</a></a>
+        <li><a href="#useit">How to use it</a></li>
+        <li><a href="#source">Source Code &amp; Credits</li>
+        </ul>
+     
+     <a name="oneclick"></a><h2>One-click Install</h2>
+      <p>Click one of the options below to install your preferred plugin. This works in most browsers, most of the time. If it fails, try a manual install.</p>
+      
+		<div class="oneclickcontainer">
+      
+		  <div class="oneclickoption left">
+			<h3>Direct</h3> 
+			<p>Your keywords are sent straight to Google for suggestions and your searches are preformed on Duck Duck Go.</p>
+			<p>This is the fastest method.</p>      
+			<a href="javascript:installSearchEngine('direct')">Install Direct</a>
+		  </div>
+		  
+		  <div class="oneclickoption">
+			<h3>Proxied</h3> 
+			<p>Your keywords are proxied through ddgg.nfriedly.com to to restore the bangs (!s) that google strips from the suggestions.</p>
+			<p>This is the recommended method.</p>
+			<a href="javascript:installSearchEngine('proxied')">Install Proxied</a>
+		  </div>
+			
+		  <div class="oneclickoption right">
+			<h3>Encrypted</h3> 
+			<p>Your keywords to straight to Google for suggestions via HTTPS and your searches are preformed on Duck Duck Go via HTTPS.</p>
+			<p>This is the most secure method.</p>
+			<a href="javascript:installSearchEngine('encrypted')">Install Encrypted</a>
+		  </div>
+		  
+		  
+      	  <div style="clear:both"></div>
+		  
+		</div>
+		  
+		  <div id="chrometips" class="highlight">
+			<h3>It looks like you're in Chrome.</h3>
+			<h4>To make Duck Duck Go + Google the default search engine:</h4>
+				<ol>
+				  <li>Click the wrench icon (<img src="images/chrome-wrench-green.jpg" alt="" align="middle" />) and choose <b>Prefferences</b>.</li>
+				  <li>In the <b>Basics</b> section, click <b>Manage Search Engines...</b> </li>
+				  <li>Hover over "<b>Duck Duck Go + Google Suggest</b>" at the bottom of the list, select it, and click <b>Make Default</b>.</li>
+				</ol>
+		  </div>
+      </div>
+      
+      
+      <a name="ff"></a><h2>How to install in FireFox 2+</h2>
+      <img src="images/ff.jpg" alt="" class="right" />
+      <ol>
+        <li>In FireFox you should have a search bar at the top with a down arrow. Click it. </li>
+        <li>There will be an option that says Add "Duck Duck Go + Google Suggest". Click that.</li>
+      </ol>
+      
+      <a name="ie"></a><h2 class="clear">How to install in Internet Explorer 7+</h2>
+      <img src="images/ie.jpg" class="right" alt="">
+      <p>In Internet Explorer it's <i>almost</i> as easy as FireFox. </p>
+      <ol>
+        <li>Click the down arrow beside the search box.</li>
+        <li>IE fakes you out and pretends that it's already installed. 
+          <br />Ignore the first "Duck Duck Go + Google Suggest" and instead go to the <b>Add Search Providers</b> option. </li>
+        <li>Another "Duck Duck Go + Google Search" should pop out of the side, click on that one.</li>
+      </ol>
+      
+      <a name="chrome"></a><h2 class="clear">How to install in Chrome</h2>
+      <p>Unfortunately, the manual method of installing a search engine in Chrome does not allow the user to specify a suggestions URL. 
+      If the <a href="#oneclick">one-click method</a> does not work, there was 
+      <a href="http://www.google.com/support/forum/p/Chrome/thread?tid=2ac92aa044ca2d8e&amp;hl=en">a suggestion</a>
+      of installing it in FireFox and then importing search settings into Chrome.</p>
+
+      <a name="opera"></a><h2 class="clear">How to install in Opera 10.60+</h2>
+      <p>Opera does not seem to allow automated installs, but it does support a manual install.  
+      Instructions adapted from <a href="http://my.opera.com/Tamil/blog/google-search-suggestions-in-opera?cid=34651402">http://my.opera.com/Tamil/blog/google-search-suggestions-in-opera?cid=34651402</a></p>
+      <ol>
+        <li>Create a "regular" Duck Duck Go search.
+          <ul>
+            <li>Go to Prefferences (<code>CTRL+F12</code>) &gt; Search</li>
+            <li>Click Add...
+                <table style="margin-left: 12px;">
+                    <tr><td>Name: </td><td><input readonly="readonly" value="Duck Duck Go + Google Suggest"  size="30" /></td></tr>
+                    <tr><td>Keyword: </td><td><input readonly="readonly" value="ddg" size="30"  /></td></tr>
+                    <tr><td>Address: </td><td><input readonly="readonly" value="http://duckduckgo.com/?q=%s"  size="30" /></td></tr>
+                    <tr><td>Query string: </td><td><input readonly="readonly" value="" size="30"  /> (Leave blank)</td></tr>
+                    <tr><td>Use as default: </td><td><input type="checkbox" checked="checked" readonly="readonly" /> (Optional, recommended)</td></tr>
+                    <tr><td>Use as Speed Dial search engine: &nbsp;</td><td><input type="checkbox" checked="checked" readonly="readonly" /> (Optional, recommended)</td></tr>
+                </table>
+            </li>
+          </ul>
+        </li>
+        
+        <li>Close Opera. You'll probably want to open these instructions in another browser.</li>
+
+        <li>Open <code>search.ini</code> file from your <a href="opera:config#Opera%20Directory" title="Opera Directory">Opera profile directory</a> directory in any text editor.</li>
+        
+        <li>At the end of Duck Duck Go + Google Suggest search engine add the following code and save:<br /><br />
+        
+<pre>Suggest Protocol=JSON
+Suggest URL=http://ddgg.nfriedly.com/complete/search?json&amp;q={SearchTerm}</pre>
+
+		<p>Change the URL in the second line to https://encrypted.google.com or http://suggestqueries.google.com for encrypted or direct methods.</p>
+		
+		<p>After adding the code, it should look like this:</p>
+
+<pre>[Search Engine X]
+UNIQUEID=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+Name=Duck Duck Go + Google Suggest
+Verbtext=0
+URL=http://duckduckgo.com/?q=%s
+Query=
+Key=ddg
+Is post=0
+UseTLD=0
+Has endseparator=0
+Encoding=iso-8859-15
+Search Type=0
+Position=-1
+Nameid=0
+Deleted=0
+Suggest Protocol=JSON
+Suggest URL=http://<span id="opera-url">ddgg.nfriedly.com</span>/complete/search?json&amp;q={SearchTerm}</pre>
+
+			
+        </li>
+        
+        <li>Restart Opera.</li>
+      </ol>
+
+      
+      <a name="useit"></a><h2 class="clear">How to use it</h2>
+      <img src="images/use.jpg" alt="" class="right" />
+      <p>As you type, your browser will query google for suggested keywords and offer to "complete" your search. 
+      Or, if you type in a math problem, it will suggest the answer instead. 
+      When you press [enter] or click the search button, the search will be performed on Duck Duck Go.</p>
+      <p>Hint: if your math problem doesn't get an answer try alternately adding / removing the = from the end.</p>
+      <h2>Enjoy!</h2>
+      <p>-Nathan</p>
+
+      
+      <a name="source"></a><h2>Source Code & Credits</h2>
+      <a href="http://github.com/nfriedly/node-bang-suggest"><img style="position: absolute; top: 0pt; right: 0pt; border: 0pt none;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+      <p>The source code and associated configurations for the proxy is <a href="https://github.com/nfriedly/node-bang-suggest">available on github</a>. If you are at all concerned about the privacy, I encourage you to set up your own server. This one is hosted on <a href="http://http://prgmr.com/">prgmr.com</a></p>
+      
+      <p>The encrypted version was <a href="http://eligrey.com/blog/post/encrypted-duck-duck-go-with-encrypted-google-suggest-search-plugin">contributed</a> by <a href="http://eligrey.com">Eli Grey</a>.</p>
+    
+    </div>
+
+	</div>
+   <div id="ft">
+	The XML OpenSearch plugins, proxy server, and code to this page may be freely distributed and/or modified under the terms of the MIT License. A link back to <a href="/">nfriedly.com</a> would be appreciated :)
+	<br />
+  	<br />This website is not affiliated with either Duck Duck Go or Google.
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript">
+
+var chrome = (navigator.userAgent.indexOf('Chrome') != -1);
+var chromeTimeout;
+
+
+function showChromeTips(){
+  $('#chrometips').show('slow');
+  $(window).unbind(); // clear our events
+}
+
+function getPluginUrl(name){
+	return "http://ddgg.nfriedly.com/" + $('#xml-' + name).attr("href");
+}
+
+function installSearchEngine(which) {
+ if (window.external && ("AddSearchProvider" in window.external)) {
+    if(chrome){
+      // if we havn't lost focus within a second, then chrome is being wierd
+      chromeTimeout = setTimeout(function(){
+	// in newer versions of chrome, the browser does seem to loose the focus :/
+	// we still want to show the chrome tips, but not the alert.
+        //alert('Either you already have the plugin installed or Chrome is just being weird.');
+        showChromeTips();
+      }, 1000);
+      // if we do loose focus, then chrome is workin normaly
+      $(window).focusout(function(){
+        clearTimeout(chromeTimeout);
+      });
+    }
+    window.external.AddSearchProvider( getPluginUrl(which) );
+    if(chrome){
+      // if the user already installed it, the window never looses focus, so it doesn't work so well
+      // so we're doing the settimeout / focus watching junk above to handle that
+      $(window).focusin(showChromeTips);
+    }
+ } else {
+   alert("Ut-Oh, it doesn't look like your browser can handle OpenSearch plugins. Nothing was installed.");
+ }
+}
+
+</script>
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-1735765-3";
+urchinTracker();
+</script>
+
 </body>
 </html>

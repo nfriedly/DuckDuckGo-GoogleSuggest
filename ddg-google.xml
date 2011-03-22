@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+<ShortName>Duck Duck Go + Google Suggest</ShortName>
+<Description>Duck Duck Go + Google Suggest</Description>
+<Image height="16" width="16" type="image/x-icon">http://duckduckgo.com/favicon.ico</Image>
+<Url type="text/html" method="get" template="http://duckduckgo.com/?q={searchTerms}"/>
+<Url type="application/x-suggestions+json" template="http://google.com/complete/search?output=firefox&amp;q={searchTerms}"/>
+<Url rel="suggestions" type="application/x-suggestions+xml" template="http://google.com/complete/search?q={searchTerms}&amp;client=ie8&amp;mw={ie:maxWidth}&amp;sh={ie:sectionHeight}&amp;rh={ie:rowHeight}&amp;inputencoding={inputEncoding}&amp;outputencoding={outputEncoding}" />
+</OpenSearchDescription>
