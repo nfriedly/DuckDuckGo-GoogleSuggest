@@ -50,7 +50,11 @@ var server = http.createServer(function(request, response){
 	
 	if(url_data.pathname == "/complete/search"){
 		return forward(request, response);
-	} 
+	}
+	
+	if(url_data.pathname == "/status"){
+		return status(request, response);
+	}
 	
 	if(url_data.pathname  == "/"){
 		request.url = "/index.html";
@@ -63,7 +67,7 @@ var server = http.createServer(function(request, response){
 
 function forward(request, response){
 
-	console.log('Forwarding: ' + request.url);
+	incrementRequests();
 
 	// get our request
 	var params = querystring.parse( url.parse(request.url).query );
@@ -123,23 +127,53 @@ function forward(request, response){
 			// when the connection to google ends, close the client's connection
 			g_response.addListener('end', function(){
 				response.end();
+				decrementRequests();
 			});
 		}
 	);
 }
 
+// counters to get a rough picture of how busy the server is and how busy it's been
+var openRequests = 0,
+	maxRequests = 0,
+	serverStart = new Date();
+
+function incrementRequests(){
+	openRequests++;
+	if(openRequests > maxRequests){
+		maxRequests = openRequests;
+	}
+}
+
+function decrementRequests(){
+	openRequests--;
+}
+
+// simple way to get the curent status of the server
+function status(request, response){
+	response.writeHead("200", {"Content-Type": "text/plain", "Expires": 0});
+	response.write("Open Requests: " + openRequests + "\n" + 
+		"Max Requests: " + maxRequests + "\n" + 
+		"Online Since: " + serverStart
+	);
+	response.end(); 
+}
 
 // a super-basic file server
 function readFile(request, response){
 
+  //process.cwd() - doesn't always point to the directory this script is in.
+
 	var pathname = url.parse(request.url).pathname,
-   		filename = path.join(process.cwd(), pathname);
+   		filename = path.join(__dirname, pathname);
  
  	function error(status, text){
 		response.writeHead(status, {"Content-Type": "text/plain"});
 		response.write("Error " + status + ": " + text + "\n");
 		response.end(); 	
  	}
+  
+  console.log(filename, " - ", pathname);
  
  	// send the file out if it exists and it's readable, error otherwise
 	path.exists(filename, function(exists) {
