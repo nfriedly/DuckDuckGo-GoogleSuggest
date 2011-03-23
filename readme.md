@@ -2,23 +2,25 @@
 
 This project creates OpenSearch Plugins that combine Duck Duck Go searches with Google Suggestions. It optionally proxies the suggestions via a node.js server to restore the !bangs that Google removes from the suggestions.
 
-About !bangs: http://duckduckgo.com/bang.html
+About !bangs: [http://duckduckgo.com/bang.html](http://duckduckgo.com/bang.html)
 
 ## Installation / Server Configuration:
 
 Installing this script is as simple as downloading it to a directory and running it. However, setting up node.js, upstart, and monit take a little more work:
 
 ### Install Node.js:
-* https://github.com/joyent/node/wiki/Installation
-* Installing NPM: http://howtonode.org/introduction-to-npm
-* Node.js Upstart service: http://kevin.vanzonneveld.net/techblog/article/run_nodejs_as_a_service_on_ubuntu_karmic/
-* Upstart and Monit: http://howtonode.org/deploying-node-upstart-monit
 
 I installed node.js 0.4.3 by compiling from source, then installed npm via the shell script, then installed nodejs 0.5.0-pre from npm.
+
+* [https://github.com/joyent/node/wiki/Installation](https://github.com/joyent/node/wiki/Installation)
+* Installing NPM: [http://howtonode.org/introduction-to-npm](http://howtonode.org/introduction-to-npm)
+
 
 ### Upstart Script
 
 Upstart is not required, but it is recommended because it allow the server to be easily started and stopped easily and come up automatically if your server is restarted.
+
+* Node.js Upstart service: [http://kevin.vanzonneveld.net/techblog/article/run_nodejs_as_a_service_on_ubuntu_karmic/](http://kevin.vanzonneveld.net/techblog/article/run_nodejs_as_a_service_on_ubuntu_karmic/)
 
 This is my current upstart script. It's located in `/etc/init/nodejs-ddgg.conf`. 
 
