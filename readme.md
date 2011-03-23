@@ -6,7 +6,12 @@ About !bangs: [http://duckduckgo.com/bang.html](http://duckduckgo.com/bang.html)
 
 ## Installation / Server Configuration:
 
-Installing this script is as simple as downloading it to a directory and running it. However, setting up node.js, upstart, and monit take a little more work:
+Installing this script is almost as simple as downloading it to a directory and running it. You'll need to do two things to get it ready:
+
+* find-and-replace "ddgg.nfriedly.com" with your site's url in `index.html` and `ddg-google-proxied.xml`.
+* update or delete the Google Analytics code at the bottom of `index.html`
+
+However, setting up node.js, upstart, and monit take a little more work:
 
 ### Install Node.js:
 
