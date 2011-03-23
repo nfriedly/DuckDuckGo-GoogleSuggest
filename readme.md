@@ -1,6 +1,6 @@
 # Duck Duck Go + (Proxied) Google Suggests
 
-This project creates OpenSearch Plugins that combine Duck Duck Go searches with Google Suggestions. It optionally proxies the suggestions via a node.js server to restore the !bangs that Google removes from the suggestions.
+This project creates OpenSearch Plugins that combine [Duck Duck Go](http://duckduckgo.com/) searches with [Google Suggestions](http://www.google.com/support/websearch/bin/answer.py?hl=en&answer=106230). It optionally proxies the suggestions via a node.js server to restore the !bangs that Google removes from the suggestions.
 
 About !bangs: [http://duckduckgo.com/bang.html](http://duckduckgo.com/bang.html)
 
@@ -119,9 +119,9 @@ And then, if you're like me, and already had a number of sites set up in Apache 
 
 ## MIT License:
 
-Copyright (c) 2011 Nathan Friedly - http://nfriedly.com
+Copyright (c) 2011 Nathan Friedly - [http://nfriedly.com](http://nfriedly.com "Node.js developer, JavaScript Expert")
 
-Encrypted Search Plugin Copyright Eli Grey - http://eligrey.com
+Encrypted Search Plugin Copyright Eli Grey - [http://eligrey.com](http://eligrey.com)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
