@@ -57,7 +57,7 @@ This is at the top of my current `/etc/monit/monitrc` script (I left the existin
 
 ### NginX
 
-NginX is a high-preformance web server. It is not required, this script will actually work without any server in front of it, but I prefer to have NginX set up as a Reverse Proxy.
+NginX is a high-performance web server. It is not required, this script will actually work without any server in front of it, but I prefer to have NginX set up as a Reverse Proxy.
 
 This is my current nginx script. For my server, I have nginx on port 80, apache on port 81, and this node.js server on port 8080:
 
