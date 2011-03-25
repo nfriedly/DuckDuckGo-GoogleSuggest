@@ -5,7 +5,7 @@
 * this server will restore the ! in all of google's suggestions. 
 *
 * This is designed for use with the Duck Duck Go + google Suggest OpenSearch plugin found here:
-* http://nfriedly.com/stuff/duckduckgoogle/
+* http://ddgg.nfriedly.com/
 *
 * This project is hosted on github:  https://github.com/nfriedly/node-bang-suggest
 *
@@ -14,21 +14,10 @@
 
 /*
 todo:
- - decide if I even want a file server in here - nginx should be able to handle that just fine
-   - reasons for: 
-     - it could customize the opensearch plugin with the correct domain name / path,
-       - could this be done in js on the client-side?
-     - would work without a front-end server (does this matter / is it a good thing?)
-   - reasons against: complexity, might be more tied to a root directory (?)
- - get this live and integrated into the existing search plugin
- - stress test it (apache bench?)
+ - stress test (apache bench?)
  - see if I can make nginx handle requests that don't need to be modified
    - see if that's any faster
- - rename readme, add instructions for setting up nginx and nodejs
  - look into npm
- - see if encryption is worth it just so I don't have to explain why it doesn't support it.
- - let GW know about it ;)
- 
 */
 
 // imports
@@ -46,7 +35,7 @@ var port = 8080,
 var server = http.createServer(function(request, response){
 	var url_data = url.parse(request.url);
 	
-	console.log("New Request: ", url_data);
+	//console.log("New Request: ", url_data);
 	
 	if(url_data.pathname == "/complete/search"){
 		return forward(request, response);
@@ -133,8 +122,9 @@ function forward(request, response){
 	);
 }
 
-// counters to get a rough picture of how busy the server is and how busy it's been
-var openRequests = 0,
+// counters to get a rough picture of how busy the server is and how busy it's been (and also if it was restarted any time recently)
+var counter = 0,
+	openRequests = 0,
 	maxRequests = 0,
 	serverStart = new Date();
 
@@ -143,6 +133,7 @@ function incrementRequests(){
 	if(openRequests > maxRequests){
 		maxRequests = openRequests;
 	}
+	counter++;
 }
 
 function decrementRequests(){
@@ -153,7 +144,8 @@ function decrementRequests(){
 function status(request, response){
 	response.writeHead("200", {"Content-Type": "text/plain", "Expires": 0});
 	response.write("Open Requests: " + openRequests + "\n" + 
-		"Max Requests: " + maxRequests + "\n" + 
+		"Max Open Requests: " + maxRequests + "\n" +
+		"Total Requests: " + counter + "\n" + 
 		"Online Since: " + serverStart
 	);
 	response.end(); 
@@ -173,7 +165,7 @@ function readFile(request, response){
 		response.end(); 	
  	}
   
-  console.log(filename, " - ", pathname);
+  //console.log(filename, " - ", pathname);
  
  	// send the file out if it exists and it's readable, error otherwise
 	path.exists(filename, function(exists) {
