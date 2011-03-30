@@ -35,28 +35,38 @@ var port = 8080,
 var server = http.createServer(function(request, response){
 	var url_data = url.parse(request.url);
 	
-	//console.log("New Request: ", url_data);
+	incrementRequests();
 	
-	if(url_data.pathname == "/complete/search"){
-		return forward(request, response);
+	try {
+	
+		if(url_data.pathname == "/complete/search"){
+			forward(request, response);
+			decrementRequests();
+			return;
+		}
+		
+		if(url_data.pathname == "/status"){
+			status(request, response);
+			decrementRequests();
+			return;
+		}
+		
+		if(url_data.pathname  == "/"){
+			request.url = "/index.html";
+		}
+		readFile(request, response);
+	
+	} catch (ex2) {
+		console.error(ex);
+		error(request, response, 500, ex);
 	}
 	
-	if(url_data.pathname == "/status"){
-		return status(request, response);
-	}
-	
-	if(url_data.pathname  == "/"){
-		request.url = "/index.html";
-	}
-	
-	return readFile(request, response);
+	decrementRequests();
 
 }); // we'll start the server at the bottom of the file
 
 
 function forward(request, response){
-
-	incrementRequests();
 
 	// get our request
 	var params = querystring.parse( url.parse(request.url).query );
@@ -68,8 +78,6 @@ function forward(request, response){
 	// but oh well....
 	var bang = params.q && params.q.substr(0,1) == "!";
 	
-	console.log(bang ? "bang!" : "no bang...");
-	
 	var xml = params.client && params.client.substr(0,2) == "ie";
 	
 	var options = {
@@ -78,48 +86,50 @@ function forward(request, response){
 	}
 	
 	// initiate our call to google
-	http.get(options, 
-		function(g_response){
+	var g_request = http.get(options, function(g_response){
 
-			// forward the HTTP status code and headers
-			response.writeHead(g_response.statusCode,
-				g_response.headers);
-			
-			// forward the data when it arrives
-			g_response.on('data', function (chunk) {
-			
-				// only process the data if the original request started with a !
-				if(bang){
-					chunk = chunk.toString();
-					if(xml){
-						chunk = chunk.replace(/<Text>(\w)/g, '<Text>!$1');
-					} else {
-						try {
-							// try to do it properly first
-							data = JSON.parse(chunk);
-							data[1] = data[1].map( function(str){
-								return "!" + str;
-							});
-							chunk = JSON.stringify(data);
-						} catch(ex) {
-							// for incomplete data / invalid JSON; 
-							// this method adds in extra !'s if there are quotes within the query.
-							chunk = chunk.replace(/"(\w)/g,'"!$1');
-						}
+		// forward the HTTP status code and headers
+		response.writeHead(g_response.statusCode,
+			g_response.headers);
+		
+		// forward the data when it arrives
+		g_response.on('data', function (chunk) {
+		
+			// only process the data if the original request started with a !
+			if(bang){
+				chunk = chunk.toString();
+				if(xml){
+					chunk = chunk.replace(/<Text>(\w)/g, '<Text>!$1');
+				} else {
+					try {
+						// try to do it properly first
+						data = JSON.parse(chunk);
+						data[1] = data[1].map( function(str){
+							return "!" + str;
+						});
+						chunk = JSON.stringify(data);
+					} catch(ex) {
+						// for incomplete data / invalid JSON; 
+						// this method adds in extra !'s if there are quotes within the query.
+						chunk = chunk.replace(/"(\w)/g,'"!$1');
 					}
 				}
-				
-				// send the data back to the client
-				response.write(chunk); // , 'binary'
-			});
+			}
+			
+			// send the data back to the client
+			response.write(chunk); // , 'binary'
+		});
 
-			// when the connection to google ends, close the client's connection
-			g_response.addListener('end', function(){
-				response.end();
-				decrementRequests();
-			});
-		}
-	);
+		// when the connection to google ends, close the client's connection
+		g_response.addListener('end', function(){
+			response.end();
+		});
+		
+	});
+	
+	g_request.addListener('error', function(err){
+		error(request, response, 500, err);
+	});
 }
 
 // counters to get a rough picture of how busy the server is and how busy it's been (and also if it was restarted any time recently)
@@ -151,32 +161,36 @@ function status(request, response){
 	response.end(); 
 }
 
+// a quick way to throw error messages
+function error(request, response, status, text){
+	response.writeHead(status, {"Content-Type": "text/plain"});
+	response.write("Error " + status + ": " + text + "\n");
+	response.end(); 	
+}
+
 // a super-basic file server
 function readFile(request, response){
 
-  //process.cwd() - doesn't always point to the directory this script is in.
+	response.setHeader('x-cwd', process.cwd());
+	//response.setheader('x-dir', __dirname);
+	//process.cwd() - doesn't always point to the directory this script is in.
 
 	var pathname = url.parse(request.url).pathname,
    		filename = path.join(__dirname, pathname);
- 
- 	function error(status, text){
-		response.writeHead(status, {"Content-Type": "text/plain"});
-		response.write("Error " + status + ": " + text + "\n");
-		response.end(); 	
- 	}
+
   
-  //console.log(filename, " - ", pathname);
+	//console.log(filename, " - ", pathname);
  
  	// send the file out if it exists and it's readable, error otherwise
 	path.exists(filename, function(exists) {
 	
 		if (!exists) {
-			return error(404, "The requested file could not be found.");
+			return error(request, response, 404, "The requested file could not be found.");
 		}
 		
 		fs.readFile(filename, "binary", function(err, data) {
 			if (err) {
-				return error(500, err);
+				return error(request, response, 500, err);
 			}
 			
 			response.writeHead(200);
