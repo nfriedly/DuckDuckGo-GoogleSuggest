@@ -171,7 +171,7 @@ function error(request, response, status, text){
 // a super-basic file server
 function readFile(request, response){
 
-	response.setHeader('x-cwd', process.cwd());
+	//response.setHeader('x-cwd', process.cwd());
 	//response.setheader('x-dir', __dirname);
 	//process.cwd() - doesn't always point to the directory this script is in.
 
@@ -192,8 +192,14 @@ function readFile(request, response){
 			if (err) {
 				return error(request, response, 500, err);
 			}
-			
-			response.writeHead(200);
+
+			// some reverse proxies (apache) add a default text/plain content-type header if none is specified			
+			var headers = {};
+			if(filename.substr(-5) == ".html" || filename.substr(-4) == ".htm"){
+				headers['content-type'] = "text/html";
+			}
+
+			response.writeHead(200, headers);
 			response.write(data, "binary");
 			response.end();
 		});

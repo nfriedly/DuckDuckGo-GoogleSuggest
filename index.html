@@ -39,7 +39,16 @@ li{margin:5px 0 5px 20px; }
 
 ul.contents li {font-size: 115%;}
 
-.highlight { border:3px dashed #67FF14; background-color:#AAFF7D; padding:20px; font-size:120%; }
+.highlight { 
+	background-color: #AAFF7D;
+	background-image: url("http://ddgg.nfriedly.com/images/ddg-green.png");
+	background-position: 5px 5px;
+	background-repeat: no-repeat;
+	border: 3px dashed #67FF14;
+	font-size: 120%;
+	min-height: 65px;
+	padding: 20px 20px 20px 110px;
+}
 .highlight a {color:#324395;}
 .highlight ol,  .highlight li{ font-size:90%;}
 
@@ -70,7 +79,7 @@ pre { margin-left: 10px; border-left: 2px solid grey; padding-left: 4px; line-he
    <div id="hd"><h1>Duck Duck Go + Google Suggest Search Plugin</h1></div>
    <div id="bd">
     <div class="yui-g">
-    
+    	
       <p class="highlight">This page allows you to add a <a href="http://duckduckgo.com">Duck Duck Go</a> search option to your web browser's built in search bar that uses 
       <a href="http://www.google.com/support/websearch/bin/answer.py?hl=en&amp;answer=106230">Google's suggestions</a> 
       to complete searches (and answer math problems).</p>
@@ -224,6 +233,8 @@ Suggest URL=http://<span id="opera-url">ddgg.nfriedly.com</span>/complete/search
       <p>The source code and associated configurations for the proxy is <a href="https://github.com/nfriedly/node-bang-suggest">available on github</a>. If you are at all concerned about the privacy, I encourage you to set up your own server. This one is hosted on <a href="http://http://prgmr.com/">prgmr.com</a></p>
       
       <p>The encrypted version was <a href="http://eligrey.com/blog/post/encrypted-duck-duck-go-with-encrypted-google-suggest-search-plugin">contributed</a> by <a href="http://eligrey.com">Eli Grey</a>.</p>
+      
+      <p>Everything else here was built by <a href="http://nfriedly.com/" title="Node.js developer and JavaScript Expert">Nathan Friedly</a> with <a href="http://nodejs.org/">node.js</a> and <a href="http://nginx.org/">nginx</a>.
       
       <p>&nbsp;</p>
     
