@@ -41,13 +41,11 @@ var server = http.createServer(function(request, response){
 	
 		if(url_data.pathname == "/complete/search"){
 			forward(request, response);
-			decrementRequests();
 			return;
 		}
 		
 		if(url_data.pathname == "/status"){
 			status(request, response);
-			decrementRequests();
 			return;
 		}
 		
@@ -60,8 +58,6 @@ var server = http.createServer(function(request, response){
 		console.error(ex);
 		error(request, response, 500, ex);
 	}
-	
-	decrementRequests();
 
 }); // we'll start the server at the bottom of the file
 
@@ -123,6 +119,7 @@ function forward(request, response){
 		// when the connection to google ends, close the client's connection
 		g_response.addListener('end', function(){
 			response.end();
+			decrementRequests();
 		});
 		
 	});
@@ -158,14 +155,16 @@ function status(request, response){
 		"Total Requests: " + counter + "\n" + 
 		"Online Since: " + serverStart
 	);
-	response.end(); 
+	response.end();
+	decrementRequests();
 }
 
 // a quick way to throw error messages
 function error(request, response, status, text){
 	response.writeHead(status, {"Content-Type": "text/plain"});
 	response.write("Error " + status + ": " + text + "\n");
-	response.end(); 	
+	response.end();
+	decrementRequests();
 }
 
 // a super-basic file server
@@ -202,6 +201,7 @@ function readFile(request, response){
 			response.writeHead(200, headers);
 			response.write(data, "binary");
 			response.end();
+			decrementRequests();
 		});
 	});
 }
