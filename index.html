@@ -53,8 +53,9 @@ ul.contents li {font-size: 115%;}
 .highlight ol,  .highlight li{ font-size:90%;}
 
 .oneclickcontainer {margin:30px 0px;}
-.oneclickcontainer a {border:2px solid #67ff14; padding:20px; -moz-border-radius:10px; -webkit-border-radius:10px; font-size:140%; color: #324395; background-color:#AAFF7D; text-align:center; display:block; margin:20px 0;}
-.oneclickcontainer a:hover {background-color:#BAFF8D;}
+.oneclickcontainer a {color: black;}
+.oneclickcontainer a.button {border:2px solid #67ff14; padding:20px; -moz-border-radius:10px; -webkit-border-radius:10px; font-size:140%; background-color: #AAFF7D; color:#324395; text-align:center; display:block; margin:20px 0;}
+.oneclickcontainer a.button:hover {background-color:#BAFF8D;}
 
 .oneclickoption {float:left; border:1px solid grey; padding:10px; width:220px;}
 .oneclickoption.right {border-radius: 0 10px 10px 0; -moz-border-radius: 0 10px 10px 0; -webkit-border-radius: 0 10px 10px 0; margin:0; float:left; border-left:0;}
@@ -103,21 +104,21 @@ pre { margin-left: 10px; border-left: 2px solid grey; padding-left: 4px; line-he
 			<h3>Direct</h3> 
 			<p>Your keywords are sent straight to Google for suggestions and your searches are preformed on Duck Duck Go.</p>
 			<p>This is the fastest method.</p>      
-			<a href="javascript:installSearchEngine('direct')">Install Direct</a>
+			<a class="button" href="javascript:installSearchEngine('direct')">Install Direct</a>
 		  </div>
 		  
 		  <div class="oneclickoption">
 			<h3>Proxied</h3> 
-			<p>Your keywords are proxied through ddgg.nfriedly.com to to restore the !bangs that google strips from the suggestions.</p>
-			<p>This is the recommended method.</p>
-			<a href="javascript:installSearchEngine('proxied')">Install Proxied</a>
+			<p>Your keywords are proxied through ddgg.nfriedly.com to to restore the <a href="http://duckduckgo.com/bang.html">!bangs</a> that google strips from the suggestions.</p>
+			<p>This is the most functional method.</p>
+			<a class="button" href="javascript:installSearchEngine('proxied')">Install Proxied</a>
 		  </div>
 			
 		  <div class="oneclickoption right">
 			<h3>Encrypted</h3> 
-			<p>Your keywords to straight to Google for suggestions via HTTPS and your searches are preformed on Duck Duck Go via HTTPS.</p>
+			<p>Your keywords go straight to Google for suggestions via HTTPS and your searches are preformed on Duck Duck Go via HTTPS.</p>
 			<p>This is the most secure method.</p>
-			<a href="javascript:installSearchEngine('encrypted')">Install Encrypted</a>
+			<a class="button" href="javascript:installSearchEngine('encrypted')">Install Encrypted</a>
 		  </div>
 		  
 		  
