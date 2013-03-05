@@ -28,7 +28,7 @@ var http = require('http'),
 	fs = require("fs");
 
 // configuration
-var port = 8080,
+var port = process.env.PORT || 8080,
 	ip = null; // string ip, or null for any ip
 
 
