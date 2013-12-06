@@ -12,13 +12,12 @@
 * Copyright Nathan Friedly - http://nfriedly.com - MIT License
 */
 
-/*
-todo:
- - stress test (apache bench?)
- - see if I can make nginx handle requests that don't need to be modified
-   - see if that's any faster
- - look into npm
-*/
+// monitoring
+// load newrelic for monitoring, but only if there's a license key
+if (process.env.NEW_RELIC_LICENSE_KEY) {
+    require('newrelic');
+}
+
 
 // imports
 var http = require('http'),
@@ -34,8 +33,6 @@ var port = process.env.PORT || 8080,
 
 var server = http.createServer(function(request, response){
 	var url_data = url.parse(request.url);
-	
-	incrementRequests();
 	
 	try {
 	
@@ -119,7 +116,6 @@ function forward(request, response){
 		// when the connection to google ends, close the client's connection
 		g_response.addListener('end', function(){
 			response.end();
-			decrementRequests();
 		});
 		
 	});
@@ -127,24 +123,6 @@ function forward(request, response){
 	g_request.addListener('error', function(err){
 		error(request, response, 500, err);
 	});
-}
-
-// counters to get a rough picture of how busy the server is and how busy it's been (and also if it was restarted any time recently)
-var counter = 0,
-	openRequests = 0,
-	maxRequests = 0,
-	serverStart = new Date();
-
-function incrementRequests(){
-	openRequests++;
-	if(openRequests > maxRequests){
-		maxRequests = openRequests;
-	}
-	counter++;
-}
-
-function decrementRequests(){
-	openRequests--;
 }
 
 // simple way to get the curent status of the server
@@ -156,7 +134,6 @@ function status(request, response){
 		"Online Since: " + serverStart
 	);
 	response.end();
-	decrementRequests();
 }
 
 // a quick way to throw error messages
@@ -164,24 +141,17 @@ function error(request, response, status, text){
 	response.writeHead(status, {"Content-Type": "text/plain"});
 	response.write("Error " + status + ": " + text + "\n");
 	response.end();
-	decrementRequests();
+	
 }
 
 // a super-basic file server
 function readFile(request, response){
 
-	//response.setHeader('x-cwd', process.cwd());
-	//response.setheader('x-dir', __dirname);
-	//process.cwd() - doesn't always point to the directory this script is in.
-
 	var pathname = url.parse(request.url).pathname,
    		filename = path.join(__dirname, pathname);
 
-  
-	//console.log(filename, " - ", pathname);
- 
  	// send the file out if it exists and it's readable, error otherwise
-	path.exists(filename, function(exists) {
+	fs.exists(filename, function(exists) {
 	
 		if (!exists) {
 			return error(request, response, 404, "The requested file could not be found.");
@@ -201,7 +171,7 @@ function readFile(request, response){
 			response.writeHead(200, headers);
 			response.write(data, "binary");
 			response.end();
-			decrementRequests();
+			
 		});
 	});
 }
