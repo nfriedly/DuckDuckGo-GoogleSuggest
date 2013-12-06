@@ -1,11 +1,29 @@
 {
   "name": "node-bang-suggest",
   "version": "1.1.0",
-  "dependencies": {
-    "newrelic": "~1.1.1"
-  },
   "engines": {
     "node": "0.10.x",
     "npm": "1.x"
+  },
+  "jshintConfig": {
+    "undef": true,
+    "unused": true,
+    "newcap": true,
+    "node": true,
+    "browser": false,
+    "devel": true
+  },
+  "scripts": {
+    "start": "gatling ./app.js",
+    "beautify": "js-beautify --replace ./*.js ./lib/*.js ./test/*.js",
+    "jshint": "jshint ./ --exclude node_modules/"
+  },
+  "dependencies": {
+    "newrelic": "~1.1.1",
+    "gatling": "~1.0.1"
+  },
+  "devDependencies": {
+    "js-beautify": "~1.4.2",
+    "jshint": "~2.3.0"
   }
 }

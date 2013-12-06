@@ -18,20 +18,19 @@ if (process.env.NEW_RELIC_LICENSE_KEY) {
     require('newrelic');
 }
 
-
 // imports
 var http = require('http'),
 	url = require('url'),
 	querystring = require('querystring'),
 	path = require("path"),
 	fs = require("fs");
+	
+// for great performance!
+// kind of hard to see much difference in local testing, but I think this should make an appreciable improvement in production
+// https://github.com/substack/hyperquest#rant
+http.globalAgent.maxSockets = 64;
 
-// configuration
-var port = process.env.PORT || 8080,
-	ip = null; // string ip, or null for any ip
-
-
-var server = http.createServer(function(request, response){
+function app(request, response){
 	var url_data = url.parse(request.url);
 	
 	try {
@@ -56,7 +55,7 @@ var server = http.createServer(function(request, response){
 		error(request, response, 500, ex);
 	}
 
-}); // we'll start the server at the bottom of the file
+}
 
 
 function forward(request, response){
@@ -176,10 +175,4 @@ function readFile(request, response){
 	});
 }
 
-try {
-	server.listen(port, ip);
-	console.log('node-bang-suggest server running on ' + ((ip) ? ip + ":" : "port ") + port);
-} catch (ex) {
-	console.log("server failed, perhaps the port (" + port + ") was taken?");
-	console.error(ex);
-}
+module.exports = app;
