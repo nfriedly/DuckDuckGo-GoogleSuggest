@@ -56,7 +56,7 @@ var http = require('http'),
     domain = require('domain'),
     util = require('util'),
     path = require('path'),
-    port = process.env.port || argv.port || 8080,
+    port = process.env.PORT || argv.port || 8080,
     appFile = path.normalize(path.join(process.cwd(), argv._[0])),
     app = require(appFile),
     server;
