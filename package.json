@@ -15,12 +15,15 @@
   },
   "scripts": {
     "start": "gatling ./app.js",
-    "beautify": "js-beautify --replace ./*.js ./lib/*.js ./test/*.js",
+    "test": "npm run jshint",
+    "beautify": "js-beautify --replace ./*.js",
     "jshint": "jshint ./ --exclude node_modules/"
   },
   "dependencies": {
     "newrelic": "~1.1.1",
-    "gatling": "~1.0.1"
+    "gatling": "~1.0.1",
+    "async": "~0.2.9",
+    "mime": "~1.2.11"
   },
   "devDependencies": {
     "js-beautify": "~1.4.2",

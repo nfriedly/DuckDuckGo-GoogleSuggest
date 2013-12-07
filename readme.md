@@ -8,8 +8,6 @@ About !bangs: [http://duckduckgo.com/bang.html](http://duckduckgo.com/bang.html)
 
 # Todo
 * Add some basic tests
-* Add monitoring
-* Cache & compress static assets
 
 # Installation / Server Configuration:
 
