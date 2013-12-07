@@ -12,12 +12,6 @@
  * Copyright Nathan Friedly - http://nfriedly.com - MIT License
  */
 
-// monitoring
-// load newrelic for monitoring, but only if there's a license key
-if (process.env.NEW_RELIC_LICENSE_KEY) {
-    require('newrelic');
-}
-
 // imports
 var http = require('http'),
     url = require('url'),

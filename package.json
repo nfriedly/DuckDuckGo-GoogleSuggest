@@ -5,6 +5,7 @@
     "node": "0.10.x",
     "npm": "1.x"
   },
+  "repository": "https://github.com/nfriedly/node-bang-suggest",
   "jshintConfig": {
     "undef": true,
     "unused": true,
@@ -21,7 +22,7 @@
   },
   "dependencies": {
     "newrelic": "~1.1.1",
-    "gatling": "~1.0.1",
+    "gatling": "~1.1.0",
     "async": "~0.2.9",
     "mime": "~1.2.11"
   },
