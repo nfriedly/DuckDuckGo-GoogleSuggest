@@ -16,7 +16,9 @@
 var http = require('http'),
     url = require('url'),
     querystring = require('querystring'),
-    serveStatic = require('./lib/static');
+    static = require('node-static');
+    
+var fileServer = new static.Server('./public');
 
 // for great performance!
 // kind of hard to see much difference in local testing, but I think this should make an appreciable improvement in production
@@ -27,14 +29,13 @@ function app(request, response) {
     var url_data = url.parse(request.url);
 
     if (url_data.pathname == "/complete/search") {
-        forward(request, response);
-        return;
+        return forward(request, response);
     }
 
-    if (url_data.pathname == "/") {
-        request.url = "/index.html";
-    }
-    serveStatic(request, response);
+    //if (url_data.pathname == "/") {
+    //    request.url = "/index.html";
+    //}
+    fileServer.serve(request, response);
 }
 
 

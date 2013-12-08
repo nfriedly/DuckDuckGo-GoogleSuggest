@@ -24,7 +24,8 @@
     "newrelic": "~1.1.1",
     "gatling": "~1.1.0",
     "async": "~0.2.9",
-    "mime": "~1.2.11"
+    "mime": "~1.2.11",
+    "node-static": "~0.7.2"
   },
   "devDependencies": {
     "js-beautify": "~1.4.2",
