@@ -7,4 +7,4 @@ deploy:
     secure: gqI9wkxjaNd5AjtDNi6wZpcBxBN+VJvM6O5n0ThltMKTxz2v0DRFICE4RwHA7ecR3hL4fg7/Z4+9ziQwSexHmgdPXr4/Vo/6hVt9EMwd/7wBAhPfZCbhPbekiO7qK6Xp5qLetU6FqKXbebSMdqjIyugAaSXnOKtp3thHZMbNwao=
   app: node-bang-suggest
   on:
-    repo: nfriedly/node-bang-suggest
+    repo: nfriedly/DuckDuckGo-GoogleSuggest
