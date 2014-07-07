@@ -3,6 +3,8 @@
 <head>
 <title>Duck Duck Go + Google Suggest OpenSearch Plugin and Proxy</title>
 
+<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+
 <link rel="search" id="xml-direct" type="application/opensearchdescription+xml" title="Direct Duck Duck Go + Google Suggest" href="ddg-google.xml" >
 
 <link rel="search" id="xml-encrypted" type="application/opensearchdescription+xml" title="Encrypted Duck Duck Go + Google Suggest" href="ddg-google-encrypted.xml" >
@@ -41,16 +43,24 @@ ul.contents li {font-size: 115%;}
 
 .highlight { 
 	background-color: #AAFF7D;
-	background-image: url("images/ddg-green.png");
-	background-position: 5px 5px;
-	background-repeat: no-repeat;
 	border: 3px dashed #67FF14;
-	font-size: 120%;
 	min-height: 65px;
-	padding: 20px 20px 20px 110px;
+	padding: 5px;
+}
+.highlight:after {
+    content: "."; display: block; height: 0; clear: both; visibility: hidden; 
+}
+.highlight p {
+    margin: 15px;
+	font-size: 150%;
 }
 .highlight a {color:#324395;}
 .highlight ol,  .highlight li{ font-size:90%;}
+
+.highlight .left {
+    float: left;
+    margin-right: 20px;
+}
 
 .oneclickcontainer {margin:30px 0px;}
 .oneclickcontainer a {color: black;}
@@ -81,9 +91,16 @@ pre { margin-left: 10px; border-left: 2px solid grey; padding-left: 4px; line-he
    <div id="bd">
     <div class="yui-g">
     	
-      <p class="highlight">This page allows you to add a <a href="http://duckduckgo.com">Duck Duck Go</a> search option to your web browser's built in search bar that uses 
+      <div class="highlight">
+      <div class="left">
+        <img src="images/ddg-green.png" alt="Duck Duck Go logo"/>
+        <br />
+        <small>(Unofficial add-on)</small>
+      </div>
+      <p>This page allows you to add a <a href="http://duckduckgo.com">Duck Duck Go</a> search option to your web browser's built in search bar that uses 
       <a href="http://www.google.com/support/websearch/bin/answer.py?hl=en&amp;answer=106230">Google's suggestions</a> 
       to complete searches (and answer math problems).</p>
+      </div>
       
       <ul class="contents">
         <li><a href="#oneclick">One-click install for most modern browsers</a></li>
