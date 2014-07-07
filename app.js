@@ -32,9 +32,6 @@ function app(request, response) {
         return forward(request, response);
     }
 
-    //if (url_data.pathname == "/") {
-    //    request.url = "/index.html";
-    //}
     fileServer.serve(request, response);
 }
 
