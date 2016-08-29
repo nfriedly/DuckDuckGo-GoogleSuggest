@@ -4,7 +4,7 @@ This project creates OpenSearch Plugins that combine [Duck Duck Go](http://duckd
 
 About !bangs: [http://duckduckgo.com/bang.html](http://duckduckgo.com/bang.html)
 
-[![Build Status](https://travis-ci.org/nfriedly/node-bang-suggest.png?branch=master)](https://travis-ci.org/nfriedly/node-bang-suggest)
+[![Build Status](https://travis-ci.org/nfriedly/DuckDuckGo-GoogleSuggest.png?branch=master)](https://travis-ci.org/nfriedly/node-bang-suggest)
 
 # Todo
 * Add some basic tests
