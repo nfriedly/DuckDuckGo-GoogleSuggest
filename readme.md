@@ -6,10 +6,13 @@ About !bangs: [http://duckduckgo.com/bang.html](http://duckduckgo.com/bang.html)
 
 [![Build Status](https://travis-ci.org/nfriedly/DuckDuckGo-GoogleSuggest.png?branch=master)](https://travis-ci.org/nfriedly/node-bang-suggest)
 
-# Todo
-* Add some basic tests
 
-# Installation / Server Configuration:
+## ⚠️ Deprecated
+
+Now that Duck Duck Go offers their own search suggestions, this project is deprecated an no longer maintained or supported.
+
+
+## Installation / Server Configuration:
 
 Installing this script is almost as simple as downloading it to a directory and running it. You'll need to do two things to get it ready:
 
@@ -20,7 +23,7 @@ After that, run
     node server.js
 And your server should be up and running on port 8080!
 
-## Deployment to Heroku
+### Deployment to Heroku
 
 This should be runnable for free on Heroku
 
